@@ -18,7 +18,7 @@ class Counter extends Component{
 					<ul className="list-group">
 						{this.renderConditionalList()}
 					</ul>
-					<button onClick={this.addMessage} className="btn btn-secondary btn-sm">Incriment</button>
+					<button onClick={this.addMessage} className="btn btn-secondary btn-sm"> Click Here To Add Task</button>
 				</React.Fragment>	 
 			); 
 	}

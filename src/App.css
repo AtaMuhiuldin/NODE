@@ -26,3 +26,12 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+
+.display-none{
+  display:none;
+}
+
+.display-visible{
+  display: visible;
+}
