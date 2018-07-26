@@ -11,6 +11,7 @@
     "babel-preset-react": "^6.24.1",
     "bootstrap": "^4.1.1",
     "gh-pages": "^1.2.0",
+    "glyphicons": "^0.2.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4"
