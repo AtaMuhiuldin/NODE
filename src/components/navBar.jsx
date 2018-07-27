@@ -14,7 +14,6 @@ class NavBar extends Component
     		<React.Fragment>
     			<nav className="navbar navbar-light bg-light">
 				     <TaskForm onAdd={this.props.onAdd} />   
-   
 				  <button onClick={this.props.onReset} className="btn btn-danger btn-sm">Reset Number of Persons</button>
 					<br/> 	
 				   <Clock />

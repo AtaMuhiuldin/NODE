@@ -5,7 +5,7 @@ class SingleCounter extends Component
 	
 	constructor(){
 		super();
-		this.initializeField();
+	
 	}
 
 	state = {
@@ -16,21 +16,22 @@ class SingleCounter extends Component
 
 		btnName: 'edit',
 
-		data:''
+		data: '',
+		flag: true
 	}
 
 
-	initializeField = () =>{
-		
-	}
 
+	
 	render(){
 		
 		return(	
 
 				<React.Fragment>	
 					
-				
+
+					//// initializing Input Value to Task Name that entered 
+					{this.initializeData()}
 					
 					<button key={0}
 					onClick={() =>  this.props.onIncriment(this.props.counter) } 
@@ -43,6 +44,9 @@ class SingleCounter extends Component
 					<span style={this.state.empCountStyle}  key={2}
 					className={this.getBadge()}>{"Persons " +this.formatCount()}</span>
 
+
+
+
 					<input type="text" style={this.state.jobStyle}  key={3}
 					className={this.props.counter.txtV}   
 					onChange={this.handleChange} 
@@ -51,10 +55,12 @@ class SingleCounter extends Component
 					
 
 					
-						{this.getLabel()}
+					
+						<span  key={4}
+							className={this.props.counter.lblV}> 
+							{this.state.data}
+						</span>
 
-					
-					
 
 
 					<button key={5} onClick={this.manageData }  className={"btn  m-2 btn-sm btn-"+this.props.counter.btnType}>{this.props.counter.btnName}</button>
@@ -66,9 +72,17 @@ class SingleCounter extends Component
 	}
 	
  		
+	initializeData = () =>{
+		if(this.state.flag === true) {
+			this.state.data  = this.props.counter.data;
+		}
+		
+	}
+
 	
 	handleChange = (event) => {
 		event.preventDefault();
+		this.setState({flag:false});
 		this.setState({ data :event.target.value});
 	}
 
@@ -90,7 +104,7 @@ class SingleCounter extends Component
  	manageData = () => {
  		if(this.props.counter.mode === "edit"){
  			console.log(this.state.data);
- 			debugger;
+ 		
  			this.props.onSave(this.props.counter , this.state.data);
  			// this.changeMode();
  			this.props.onModeChange(this.props.counter, this.props.counter.mode, "info");
@@ -115,10 +129,6 @@ class SingleCounter extends Component
 	}
 
 
-	// incrementCounter = () =>{
-	// 	this.setState({count : this.props.value + 1});
-		
-	// }
 
 
 }

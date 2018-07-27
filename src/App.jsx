@@ -8,18 +8,14 @@ class App extends Component {
 	
 	constructor(){
 		super();
+
 		this.state.btnType = this.state.info;
 		this.state.mode = this.state.simpleMode;
 	}
 
 
 	state = {
-
-	
-
-		counters : [
-			
-			
+		counters : [	
 		],
 
 		info:'info',
@@ -42,7 +38,7 @@ class App extends Component {
      
        <React.Fragment>
             <NavBar onAdd={this.addTask} onReset={this.resetCounters} clockTime={this.state.clockTime} />
-
+            
            <Counters
            counters={this.state.counters} 
            onDelete={this.deleteCounter} 
@@ -101,9 +97,9 @@ class App extends Component {
 	    counters[index] = {...counter};
 	   
 	    counters[index].data = data1;
-	  	debugger;
+	 
 		this.setState({counters: counters});
-		debugger;
+		
 	}
 	
 	addTask = (value) =>{
