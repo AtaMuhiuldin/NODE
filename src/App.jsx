@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Counters from './components/counters';
+import TaskCollection from './components/taskCollection';
 import NavBar from './components/navBar';
     
 class App extends Component {
 	
+
+
 	constructor(){
 		super();
-
 		this.state.btnType = this.state.info;
 		this.state.mode = this.state.simpleMode;
 	}
 
-
 	state = {
-		counters : [	
+		taskCollection : [	
 		],
 
 		info:'info',
@@ -28,21 +28,17 @@ class App extends Component {
 
 	};
 
-  
-
-
-
   render() {
     return(
-
-     
        <React.Fragment>
-            <NavBar onAdd={this.addTask} onReset={this.resetCounters} clockTime={this.state.clockTime} />
+
+       		 {/*randering naviagation bar and passing contoles  */}
+            <NavBar onAdd={this.addTask} onReset={this.resettaskCollection} clockTime={this.state.clockTime} />
             
-           <Counters
-           counters={this.state.counters} 
-           onDelete={this.deleteCounter} 
-           onReset={this.resetCounters}
+           <TaskCollection
+           taskCollection={this.state.taskCollection} 
+           onDelete={this.deleteTask} 
+           onReset={this.resetTaskCollection}
            onIncriment={this.incrementCounter}
            onDecriment={this.decrimentCounter}        
            onSave={this.saveData}
@@ -54,90 +50,88 @@ class App extends Component {
     );
   }
 
-  	resetCounters = () =>{
-  		console.log("reseting...");
-  		
-  		
+
+  	// will reset all the persons assigend on their tasks to Zero 
+  	resettaskCollection = () =>{
   		this.setState(
-  			
-  			this.state.counters.map(m => {
+  			this.state.taskCollection.map(m => {
   			m.value = 0;
   			return m;})		
   		);
   	}	
 
-
-  	deleteCounter = counterId =>{
-		const counters = this.state.counters.filter(c => c.id !== counterId.id );
-		this.setState({ counters });
+  	// delete a task from collection
+  	deleteTask = counterId =>{
+		const taskCollection = this.state.taskCollection.filter(c => c.id !== counterId.id );
+		this.setState({ taskCollection });
 	}
 
-	incrementCounter = (counter) =>{
-
-		const counters = [...this.state.counters];
-		const index = counters.indexOf(counter);
-		counters[index] = {...counter};
-		counters[index].value++;
-		this.setState({counters});	
+	// decriment number of persons on a task
+	incrementCounter = (task) =>{
+		const taskCollection = [...this.state.taskCollection];
+		const index = taskCollection.indexOf(task);
+		taskCollection[index] = {...task};
+		taskCollection[index].value++;
+		this.setState({taskCollection});	
 	}
 
-	decrimentCounter = (counter) =>{
 
-		const counters = [...this.state.counters];
-		const index = counters.indexOf(counter);
-		counters[index] = {...counter};
-		counters[index].value--;
-		this.setState({counters});	
+	// increment number of persons on a task
+	decrimentCounter = (task) =>{
+
+		const taskCollection = [...this.state.taskCollection];
+		const index = taskCollection.indexOf(task);
+		taskCollection[index] = {...task};
+		taskCollection[index].value--;
+		this.setState({taskCollection});	
 	}
 
-	saveData = (counter ,data1) => {
 
-		const counters = [...this.state.counters];
-		const index = counters.indexOf(counter);
-	    counters[index] = {...counter};
-	   
-	    counters[index].data = data1;
-	 
-		this.setState({counters: counters});
+	// Save any edited Task discription/data
+	saveData = (task ,data1) => {
+
+		const taskCollection = [...this.state.taskCollection];
+		const index = taskCollection.indexOf(task);
+	    taskCollection[index] = {...task};
+	    taskCollection[index].data = data1;
+		this.setState({taskCollection: taskCollection});
 		
 	}
-	
+
+	// Add task to Collection 
 	addTask = (value) =>{
-		const counters = [...this.state.counters];
-		counters.push({id: this.state.countValue, value:0 , data : value, btnType : "info", mode: "simple", txtV : "display-none", lblV:"visible", btnName : "edit"})
-		this.setState({counters});
+		const taskCollection = [...this.state.taskCollection];
+		taskCollection.push({id: this.state.countValue, value:0 , data : value, btnType : "info", mode: "simple", txtV : "display-none", lblV:"visible", btnName : "edit"})
+		this.setState({taskCollection});
 		var v = this.state.countValue;
 		v++;
 		this.setState({countValue:v});
 	}
 
-	setModes = (counter ,mode, btnType) => {
-		
-		// this.state.mode = mode;
-		// this.state.btnType = btnType;
 
-		const counters = [...this.state.counters];
-		const index = counters.indexOf(counter);
-	    counters[index] = {...counter};
+
+	// manage front end to edit and save the task discription
+	setModes = (task ,mode, btnType) => {
+		const taskCollection = [...this.state.taskCollection];
+		const index = taskCollection.indexOf(task);
+	    taskCollection[index] = {...task};
 	
 		if(mode === "edit")
 		{
-			counters[index].lblV = "visible";
-	    	counters[index].txtV = "display-none";
-	    	counters[index].btnName = "edit"
-	    	counters[index].mode = "simple";
-  			
-			
+			taskCollection[index].lblV = "visible";
+	    	taskCollection[index].txtV = "display-none";
+	    	taskCollection[index].btnName = "edit"
+	    	taskCollection[index].mode = "simple";
 		}
 		else
 		{
 		
-	    	counters[index].lblV = "display-none";
-	    	counters[index].txtV = "visible";
-	    	counters[index].btnName = "save"
-	    	counters[index].mode = "edit";
+	    	taskCollection[index].lblV = "display-none";
+	    	taskCollection[index].txtV = "visible";
+	    	taskCollection[index].btnName = "save"
+	    	taskCollection[index].mode = "edit";
 		}
-		this.setState({counters});
+		this.setState({taskCollection});
 		
 	}
 	
