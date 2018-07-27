@@ -7,8 +7,6 @@ class taskForm extends Component
 		inputValue: ''
 
 	}
-
-
 	render(){
 		return(
 			<div class="form-inline">
@@ -23,15 +21,15 @@ class taskForm extends Component
 			    value={this.state.inputValue}
 			    />
 			  </div>
+			  ////// 			//// here if the input value is null the it will  never allow it to Ad a task used Ternary Operator here 
 			  <button onClick={() => {this.state.inputValue !=='' && this.props.onAdd(this.state.inputValue); this.setState({inputValue:''});} } class="btn btn-primary mb-2">Add Task</button>
 			</div>
 			);
 	}
 
-
+	////// handler to fatch Task Name .. Value 
 	handleInput = (e) =>{
 		this.setState({inputValue:e.target.value});
 	}
 }
-
 export default taskForm;
